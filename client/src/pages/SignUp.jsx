@@ -25,6 +25,7 @@ export default function SignUp() {
     // Check if username is in database, return array
     // Consider changing helper function to output boolean result
     const usernameExists = await doesUsernameExist(username);
+    // if output array does not have a length, username is valid
     if (!usernameExists.length) {
       try {
         const createdUserResult = await firebase
