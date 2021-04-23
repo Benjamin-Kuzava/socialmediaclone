@@ -16,13 +16,13 @@ module.exports = {
         base: '#616161',
         background: '#fafafa',
         primary: '#dbdbdb'
+      },
+      red: {
+        primary: '#ed4956'
       }
-    }
+    },
+    fill: (theme) => ({
+      red: theme('colors.red.primary')
+    })
   }
 };
-
-// text-red-primary
-// text-gray-base
-// border-gray-primary
-// bg-blue-medium
-// text-blue-medium
