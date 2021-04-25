@@ -11,14 +11,14 @@ export default function SignUp() {
   const [formData, setFormData] = useState({
     username: '',
     fullName: '',
-    email: '',
+    emailAddress: '',
     password: ''
   });
-  const { username, fullName, email, password } = formData;
+  const { username, fullName, emailAddress, password } = formData;
 
   // Error handling
   const [error, setError] = useState('');
-  const isInvalid = password === '' || email === '' || fullName === '' || username === '';
+  const isInvalid = password === '' || emailAddress === '' || fullName === '' || username === '';
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -30,7 +30,7 @@ export default function SignUp() {
       try {
         const createdUserResult = await firebase
           .auth()
-          .createUserWithEmailAndPassword(email, password);
+          .createUserWithEmailAndPassword(emailAddress, password);
 
         // Authentication
         // After user is created with auth, update user's profile with displayName
@@ -43,7 +43,7 @@ export default function SignUp() {
           userID: createdUserResult.user.uid,
           username: username.toLowerCase(),
           fullName,
-          email: email.toLowerCase(),
+          emailAddress: emailAddress.toLowerCase(),
           following: [],
           dateCreate: Date.now()
         });
@@ -52,7 +52,7 @@ export default function SignUp() {
         setFormData({
           username: '',
           fullName: '',
-          email: '',
+          emailAddress: '',
           password: ''
         });
         setError(error.message);
@@ -114,8 +114,8 @@ export default function SignUp() {
               aria-label="Enter your email address"
               placeholder="Email Address"
               className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
-              name="email"
-              value={email}
+              name="emailAddress"
+              value={emailAddress}
               onChange={handleChange}
             />
             <input

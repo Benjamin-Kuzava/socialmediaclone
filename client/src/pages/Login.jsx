@@ -8,23 +8,23 @@ export default function Login() {
   const { firebase } = useContext(FirebaseContext);
 
   const [formData, setFormData] = useState({
-    email: '',
+    emailAddress: '',
     password: ''
   });
-  const { email, password } = formData;
+  const { emailAddress, password } = formData;
 
   // Error handling
   const [error, setError] = useState('');
-  const isInvalid = password === '' || email === '';
+  const isInvalid = password === '' || emailAddress === '';
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await firebase.auth().signInWithEmailAndPassword(email, password);
+      await firebase.auth().signInWithEmailAndPassword(emailAddress, password);
       history.push(ROUTES.DASHBOARD);
     } catch (error) {
       setFormData({
-        email: '',
+        emailAddress: '',
         password: ''
       });
       setError(error.message);
@@ -60,8 +60,8 @@ export default function Login() {
               aria-label="Enter your email address"
               placeholder="Email Address"
               className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
-              name="email"
-              value={email}
+              name="emailAddress"
+              value={emailAddress}
               onChange={handleChange}
             />
             <input
@@ -83,13 +83,18 @@ export default function Login() {
             </button>
           </form>
         </div>
-        <div className="flex justify-center items-center flex-col w-full bg-white p-4 rounded border border-gray-primary">
+        <div className="flex justify-center items-center flex-col w-full mb-4 bg-white p-4 rounded border border-gray-primary">
           <p className="text-sm">
             Don't have an account?{` `}
             <Link to={ROUTES.SIGN_UP} className="font-bold text-blue-medium">
               Sign Up
             </Link>
           </p>
+        </div>
+        <div className="flex justify-center items-center flex-col w-full bg-white p-4 rounded border border-gray-primary">
+          <p className="text-sm">Test Account</p>
+          <p className="text-sm">Email: dali@google.com</p>
+          <p className="text-sm">Password: test123</p>
         </div>
       </div>
     </div>

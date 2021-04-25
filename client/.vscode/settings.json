@@ -3,5 +3,7 @@
   "prettier.trailingComma": "none",
   "prettier.printWidth": 100,
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.fontFamily": "FiraCode NF",
+  "editor.fontLigatures": true
 }
