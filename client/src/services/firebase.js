@@ -23,3 +23,37 @@ export const getUserByUserId = async (userID) => {
 
   return user;
 };
+
+// get array of suggested users, not incuding currentUser && users that currentUser is following
+export const getSuggestedProfiles = async (userID, following) => {
+  const result = await firebase.firestore().collection('users').limit(10).get();
+  return result.docs
+    .map((user) => ({ ...user.data(), docId: user.id }))
+    .filter((profile) => profile.userID !== userID && !following.includes(profile.userID));
+};
+
+// update the following array of logged in user
+// toggle following state based on isFollowingProfile param
+export const updateFollowingArray = async (loggedInUserDocID, profileID, isFollowingProfile) =>
+  firebase
+    .firestore()
+    .collection('users')
+    .doc(loggedInUserDocID)
+    .update({
+      following: isFollowingProfile
+        ? FieldValue.arrayRemove(profileID)
+        : FieldValue.arrayUnion(profileID)
+    });
+
+// update followers array of user who has been followed
+// toggle following state based on isFollowingProfile param
+export const updateFollowersArray = async (profileDocID, currentUserID, isFollowingProfile) =>
+  firebase
+    .firestore()
+    .collection('users')
+    .doc(profileDocID)
+    .update({
+      followers: isFollowingProfile
+        ? FieldValue.arrayRemove(currentUserID)
+        : FieldValue.arrayUnion(currentUserID)
+    });

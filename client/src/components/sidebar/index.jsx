@@ -4,15 +4,14 @@ import User from './User';
 
 export default function Sidebar() {
   const {
-    user: { fullName, username, userID }
+    user: { docId, fullName, username, userID, following }
   } = useUser();
-
-  console.log(fullName, username, userID);
 
   return (
     <div className="p-4">
-      <User />
-      <Suggestions />
+      <User username={username} fullName={fullName} />
+      <Suggestions userID={userID} following={following} loggedInUserDocID={docId} />
+      {/* need userID to make sure that follows array of a suggestion doesn't include current user */}
     </div>
   );
 }
