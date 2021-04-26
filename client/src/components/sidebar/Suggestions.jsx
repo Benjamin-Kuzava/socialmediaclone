@@ -9,7 +9,6 @@ const Suggestions = ({ userID, following, loggedInUserDocID }) => {
 
   useEffect(() => {
     const fetchSuggestedProfiles = async () => {
-      // console.log('useeffect');
       const resp = await getSuggestedProfiles(userID, following);
       setProfiles(resp);
     };
