@@ -19,11 +19,8 @@ const usePhotos = () => {
       followedUserPhotos.sort((a, b) => b.dateCreated - a.dateCreated);
       setPhotos(followedUserPhotos);
     };
-    if (userID) {
-      fetchTimelinePhotos();
-    }
+    fetchTimelinePhotos();
   }, [userID]);
-
   return { photos };
 };
 

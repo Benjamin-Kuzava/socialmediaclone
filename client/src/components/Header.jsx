@@ -25,7 +25,7 @@ export default function Header() {
               </Link>
             </h1>
           </div>
-          <div className="text-gray-700 text-cent flex items-center align-items">
+          <div className="text-gray-700 text-center flex items-center align-items">
             {user ? (
               <>
                 <Link to={ROUTES.DASHBOARD} aria-label="Dashboard">
