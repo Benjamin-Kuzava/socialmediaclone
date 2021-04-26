@@ -57,3 +57,32 @@ export const updateFollowersArray = async (profileDocID, currentUserID, isFollow
         ? FieldValue.arrayRemove(currentUserID)
         : FieldValue.arrayUnion(currentUserID)
     });
+
+// get username, photo data, and bool userLikedPhoto for each user currentUser follows
+export const getPhotos = async (userID, following) => {
+  const result = await firebase
+    .firestore()
+    .collection('photos')
+    .where('userID', 'in', following)
+    .get();
+
+  const userFollowedPhotos = result.docs.map((photo) => ({
+    ...photo.data(),
+    docId: photo.id
+  }));
+
+  // Easiest way to do a map inside an await?
+  const photosWithUserDetails = await Promise.all(
+    userFollowedPhotos.map(async (photo) => {
+      let userLikedPhoto = false;
+      if (photo.likes.includes(userID)) {
+        userLikedPhoto = true;
+      }
+      const user = await getUserByUserId(photo.userId);
+      const { username } = user[0];
+      return { username, ...photo, userLikedPhoto };
+    })
+  );
+
+  return photosWithUserDetails;
+};

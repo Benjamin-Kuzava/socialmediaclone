@@ -24,7 +24,7 @@ const Suggestions = ({ userID, following, loggedInUserDocID }) => {
   ) : profiles.length > 0 ? (
     <div className="rounded flex flex-col">
       <div className="text-sm flex items-center align-items justify-between mb-2">
-        <p className="font-bold text-gray-base">Suggestions for you</p>
+        <p className="font-bold text-gray-base">Suggestions For You</p>
       </div>
       <div className="mt-4 grid gap-5">
         {profiles.map((profile) => (

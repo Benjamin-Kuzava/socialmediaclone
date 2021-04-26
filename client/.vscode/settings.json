@@ -4,6 +4,6 @@
   "prettier.printWidth": 100,
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.fontFamily": "FiraCode NF",
+  "editor.fontFamily": "Fira Code",
   "editor.fontLigatures": true
 }
