@@ -7,7 +7,6 @@ import Footer from './Footer';
 import Comment from './Comment';
 
 export default function Post({ photo }) {
-  // header, image, actions(like, comment icons), footer, comments
   const commentInput = useRef(null);
   const handleFocus = () => commentInput.current.focus();
 

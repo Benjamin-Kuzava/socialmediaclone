@@ -45,7 +45,8 @@ export default function SignUp() {
           fullName,
           emailAddress: emailAddress.toLowerCase(),
           following: [],
-          dateCreate: Date.now()
+          followers: [],
+          dateCreated: Date.now()
         });
         history.push(ROUTES.DASHBOARD);
       } catch (error) {
