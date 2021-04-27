@@ -130,3 +130,17 @@ export const isUserFollowingProfile = async (loggedInUserUsername, profileUserID
 
   return response.userID;
 };
+
+// Update the following and followers array of loggedInUser and other user, respectively
+export const toggleFollow = async (
+  isFollowingProfile,
+  activeUserDocId,
+  profileDocId,
+  profileUserId,
+  followingUserId
+) => {
+  // activeUser's firebase doc, profileUser's ID
+  await updateFollowingArray(activeUserDocId, profileUserId, isFollowingProfile);
+  // profileUser's firebase doc, activeUser's ID
+  await updateFollowersArray(profileDocId, followingUserId, isFollowingProfile);
+};
