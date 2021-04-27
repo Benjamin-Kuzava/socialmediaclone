@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { formatDistance } from 'date-fns';
 import { Link } from 'react-router-dom';
@@ -6,13 +6,26 @@ import AddComment from './AddComment';
 
 export default function Comment({ docId, comments: allComments, posted, commentInput }) {
   const [comments, setComments] = useState(allComments);
+  const [displayedComments, setDisplayedComments] = useState(allComments);
+  const [viewAll, setViewAll] = useState(false);
+
+  useEffect(() => {
+    setDisplayedComments(viewAll ? allComments : allComments.slice(0, 3));
+  }, [viewAll, allComments]);
+
   return (
     <>
       <div className="p-4 pt-1 pb-4">
         {comments.length >= 3 && (
-          <p className="text-sm text-gray-base mb-1 cursor-pointer">View all comments</p>
+          <button
+            type="button"
+            className="text-sm text-gray-base mb-1 cursor-pointer"
+            onClick={() => setViewAll((prev) => !prev)}
+          >
+            View all comments
+          </button>
         )}
-        {comments.slice(0, 3).map((item) => (
+        {displayedComments.map((item) => (
           <p key={`${item.comment}-${item.displayName}`} className="mb-1">
             <Link to={`/p/${item.displayName}`}>
               <span className="mr-1 font-bold">{item.displayName}</span>
