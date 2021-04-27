@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
-import { Route, Redirect } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 
+// higher order component to handle redirects for loggedInUsers
 export default function IsUserLoggedIn({ user, loggedInPath, children, ...rest }) {
   return (
     <Route

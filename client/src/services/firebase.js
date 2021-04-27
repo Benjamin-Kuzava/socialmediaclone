@@ -1,17 +1,29 @@
 import { firebase, FieldValue } from '../lib/firebase';
 
+// List of service functions:
+// doesUsernameExist
+// getUserByUsername
+// getUserByUserId
+// getSuggestedProfiles
+// updateFollowingArray
+// updateFollowersArray
+// toggleFollow
+// getPhotos
+// getUserPhotosByUsername
+// isUserFollowingProfile
+
+// Check if username is in db
 export const doesUsernameExist = async (username) => {
   const result = await firebase
     .firestore()
     .collection('users')
     .where('username', '==', username)
     .get();
-  // the format of the result object is a little odd
-  // map through array of users:
-  // there will either be an empty array or an array of one user
+  // output either an empty array or an array of one user
   return result.docs.map((user) => user.data().length > 0);
 };
 
+// get user from db where username === username in db
 export const getUserByUsername = async (username) => {
   const result = await firebase
     .firestore()
@@ -27,7 +39,7 @@ export const getUserByUsername = async (username) => {
   return user;
 };
 
-// get user from the firestore where userId === userId (passed from the auth)
+// get user from db where userId === userId (passed from auth in firebase)
 export const getUserByUserId = async (userID) => {
   const result = await firebase.firestore().collection('users').where('userID', '==', userID).get();
   // Optional: pass docId for CRUD operations later on
@@ -39,7 +51,7 @@ export const getUserByUserId = async (userID) => {
   return user;
 };
 
-// get array of suggested users, not incuding currentUser && users that currentUser is following
+// get array of suggested users, excluding currentUser && users that currentUser is following
 export const getSuggestedProfiles = async (userID, following) => {
   const result = await firebase.firestore().collection('users').limit(10).get();
   return result.docs
@@ -47,7 +59,7 @@ export const getSuggestedProfiles = async (userID, following) => {
     .filter((profile) => profile.userID !== userID && !following.includes(profile.userID));
 };
 
-// update the following array of logged in user
+// update the following array of activeUser
 // toggle following state based on isFollowingProfile param
 export const updateFollowingArray = async (loggedInUserDocID, profileID, isFollowingProfile) =>
   firebase
@@ -60,7 +72,7 @@ export const updateFollowingArray = async (loggedInUserDocID, profileID, isFollo
         : FieldValue.arrayUnion(profileID)
     });
 
-// update followers array of user who has been followed
+// update followers array of profileUser
 // toggle following state based on isFollowingProfile param
 export const updateFollowersArray = async (profileDocID, currentUserID, isFollowingProfile) =>
   firebase
@@ -86,7 +98,6 @@ export const getPhotos = async (userID, following) => {
     docId: photo.id
   }));
 
-  // Easiest way to do a map inside an await?
   const photosWithUserDetails = await Promise.all(
     userFollowedPhotos.map(async (photo) => {
       let userLikedPhoto = false;
@@ -101,6 +112,7 @@ export const getPhotos = async (userID, following) => {
   return photosWithUserDetails;
 };
 
+// get activeUser's photos
 export const getUserPhotosByUsername = async (username) => {
   const [user] = await getUserByUsername(username);
   const result = await firebase
@@ -115,6 +127,8 @@ export const getUserPhotosByUsername = async (username) => {
   }));
 };
 
+// check if activeUser is following profile
+// Outputs a userID if true
 export const isUserFollowingProfile = async (loggedInUserUsername, profileUserID) => {
   const result = await firebase
     .firestore()

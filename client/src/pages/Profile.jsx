@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
-import { doesUsernameExist, getUserByUsername } from '../services/firebase';
-import * as ROUTES from '../constants/routes';
+import { useHistory, useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import UserProfile from '../components/profile';
+import * as ROUTES from '../constants/routes';
+import { getUserByUsername } from '../services/firebase';
 
 export default function Profile() {
   const { username } = useParams();

@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
-import { Route, Redirect } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
 
+// Higher-order component for protected routes
 export default function ProtectedRoute({ user, children, ...rest }) {
   return (
     <Route

@@ -2,9 +2,9 @@ import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import * as ROUTES from './constants/routes';
 import UserContext from './context/user';
-import useAuthListener from './hooks/use-auth-listener';
-import ProtectedRoute from './helpers/protectedRoute';
 import IsUserLoggedIn from './helpers/isUserLoggedIn';
+import ProtectedRoute from './helpers/protectedRoute';
+import useAuthListener from './hooks/use-auth-listener';
 
 // split large bundle into chunks (dynamic loading on request)
 const Login = lazy(() => import('./pages/Login'));
