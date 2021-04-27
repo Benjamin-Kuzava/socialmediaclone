@@ -24,5 +24,10 @@ module.exports = {
     fill: (theme) => ({
       red: theme('colors.red.primary')
     })
+  },
+  variants: {
+    extend: {
+      display: ['group-hover']
+    }
   }
 };
