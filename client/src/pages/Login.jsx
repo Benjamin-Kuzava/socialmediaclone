@@ -93,7 +93,7 @@ export default function Login() {
         </div>
         <div className="flex justify-center items-center flex-col w-full bg-white p-4 rounded border border-gray-primary">
           <p className="text-sm">Test Account</p>
-          <p className="text-sm">Email: dali@google.com</p>
+          <p className="text-sm">Email: kuzav1bj@gmail.com</p>
           <p className="text-sm">Password: test123</p>
         </div>
       </div>
