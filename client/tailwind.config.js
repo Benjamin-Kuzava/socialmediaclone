@@ -29,5 +29,8 @@ module.exports = {
     extend: {
       display: ['group-hover']
     }
+  },
+  purge: {
+    content: ['./src/*.js', './src/*.jsx']
   }
 };
