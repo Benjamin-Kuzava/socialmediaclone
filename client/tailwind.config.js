@@ -31,6 +31,6 @@ module.exports = {
     }
   },
   purge: {
-    content: ['./src/*.js', './src/*.jsx']
+    content: ['./src/**/*.js', './src/**/*.jsx', './src/**/**/*.js', './src/**/**/*.jsx']
   }
 };
