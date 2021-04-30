@@ -30,8 +30,5 @@ module.exports = {
       display: ['group-hover']
     }
   },
-  purge: {
-    enabled: true,
-    content: ['./src/**/*.js', './src/**/*.jsx', './src/**/**/*.js', './src/**/**/*.jsx']
-  }
+  purge: ['./src/**/*.{js,jsx}', './src/**/**/*.{js, jsx}', './public/index.html']
 };
